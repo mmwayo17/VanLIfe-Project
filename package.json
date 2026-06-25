@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "mirage": "^0.0.7",
+    "miragejs": "^0.1.48",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.0"
