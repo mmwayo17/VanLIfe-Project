@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 /*
  {
@@ -11,20 +11,9 @@ import { useState, useEffect } from "react";
 }
  */
 export default function Vans(props){
-    const [vansData, setVansData] = useState([])
 
-    useEffect(() => {
-        async function data(params) {
-            const response = await fetch("api/vans")
-            const data = await response.json()
-
-            setVansData(data.vans)
-        }
-
-        data()
-    }, [])
-
-    const vanElements = vansData.map(van =>
+    const vanElements = props.vansData.map(van =>
+        <Link key={van.id} to={van.id} className="van-details-link">
         <div key={van.id} className="van-tile">
             <img alt={van.name} src={van.imageUrl} />
             <div className="van-info">
@@ -33,6 +22,7 @@ export default function Vans(props){
             </div>
             <i className={`van-type ${van.type} selected`}>{van.type}</i>
         </div>
+        </Link>
     )
 
     return(
