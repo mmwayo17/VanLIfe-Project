@@ -238,9 +238,9 @@ i[class*='van-type-'] {
     text-decoration: none;
 }
 
-.van-detail-container .back-button:visited {
+/*.van-detail-container .back-button:visited {
     
-}
+}*/
 
 .van-detail-container .back-button span {
     text-decoration: underline;
@@ -280,4 +280,78 @@ i[class*='van-type-'] {
     background-color: #FF8C38;
     color: white;
     font-size: 1.125rem;
+}
+
+.host-layout-nav{
+    display: flex;
+}
+
+.host-layout-nav > a{
+    all: unset;
+    cursor: pointer;
+    color:#4D4D4D;
+    padding: 5px 20px;
+}
+
+.host-layout-nav > a:hover{
+    color: #161616;
+    transform: translate(1px, 1px);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+footer{
+    background-color: #161616;
+    color: #AAAAAA;
+    height: 74px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    font-weight: 500;
+}
+
+a.active-link{
+    font-weight: "bold";
+    text-decoration: "underline";
+    color: "#161616";
+}
+
+.host-van-link-wrapper {
+    color: unset;
+    text-decoration: unset;
+}
+
+.host-van-single {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    margin-bottom: 15px;
+    padding-block: 18px;
+    padding-left: 24px;
+}
+
+.host-van-single > img {
+    height: 70px;
+    border-radius: 5px;
+    margin-right: 17px;
+}
+
+.host-van-info h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-block: 10px;
+}
+
+.host-van-info p {
+    margin-block: 10px;
+}
+
+.host-vans-list {
+    padding-inline: 26px;
+}
+
+.host-vans-title {
+    padding-inline: 26px;
 }
