@@ -20,7 +20,7 @@ function App() {
 
     useEffect(() => {
         async function data() {
-            const response = await fetch("api/vans")
+            const response = await fetch("/api/vans")
             const data = await response.json()
 
             setVansData(data.vans)

@@ -3,9 +3,10 @@ import { Link } from "react-router-dom"
 
 export default function HostVans(){
     const [vans, setVans] = useState([])
+    
     useEffect(()=>{
         async function data(){
-            const response = await fetch('api/host/vans')
+            const response = await fetch('/api/host/vans')
             const data = await response.json()
 
             setVans(data.vans)
