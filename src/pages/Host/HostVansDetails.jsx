@@ -17,7 +17,11 @@ export default function HostVansDetails(){
         detailData()
     }, [])
 
-
+    const navStyle = {
+        textDecoration : "underline",
+        fontWeight : "Bold",
+        color: "#161616"
+    }
 
     return(
         <>
@@ -33,11 +37,22 @@ export default function HostVansDetails(){
             </div>
 
             <div className="host-van-details-nav">
-                <NavLink to="/host/vans/:id">Details</NavLink>
-                <NavLink to="/host/vans/:id/pricing">Pricing</NavLink>
-                <NavLink to="/host/vans/:id/photos">Photos</NavLink>
+                <NavLink to={`/host/vans/${params.id}`} 
+                    style={({isActive}) => isActive? navStyle: null} end>
+                Details
+                </NavLink>
+
+                <NavLink to={`/host/vans/${params.id}/pricing`} 
+                    style={({isActive}) => isActive? navStyle: null}>
+                Pricing
+                </NavLink>
+
+                <NavLink to={`/host/vans/${params.id}/photos`} 
+                    style={({isActive}) => isActive? navStyle: null}>
+                Photos
+                </NavLink>
             </div>
-            <Outlet />
+            <Outlet context={[vanDetails]}/>
             
         </section>
         </>
