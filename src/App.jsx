@@ -1,9 +1,9 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import './App.css'
 import Home from './pages/Vans/Home'
 import About from './pages/Vans/About'
-import Vans from './pages/Vans/Vans'
+import Vans,  { loader as vansLoader } from './pages/Vans/Vans'
 import VanDetail from './pages/Vans/vanDetail'
 import Layout from './components/Layout'
 import Host from './pages/Host/Dashboard'
@@ -17,47 +17,60 @@ import HostVansDetails from './pages/Host/HostVansDetails'
 import HostVanInfo from './pages/Host/HostVanInfo'
 import HostVanPhotos from './pages/Host/HostVanPhotos'
 import HostVanPricing from './pages/Host/HostVanPricing'
+import NotFound from './pages/NotFound'
+import getData from './api'
 
 function App() {
-  const [vansData, setVansData] = useState([])
+    const [vansData, setVansData] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         async function data() {
-            const response = await fetch("/api/vans")
-            const data = await response.json()
-
-            setVansData(data.vans)
+        setLoading(true)
+        try{
+            const data = await getData()
+            setVansData(data)
+        }catch(error){
+            setError(error)
+        }finally{
+            setLoading(false)
+        }
+        
+        
         }
 
         data()
     }, [])
-  
-  return (
-    <BrowserRouter>
-      
-      <Routes>
-        <Route element={<Layout/>}>
-          <Route path='/' element={<Home/>} />
-          <Route path='about' element={<About/>} />
 
-          <Route path='host' element={<HostLayout/>} >
+    const routes = createBrowserRouter(createRoutesFromElements(
+        <Route element={<Layout/>}>
+        <Route path='/' element={<Home/>} />
+        <Route path='about' element={<About/>} />
+
+        <Route path='host' element={<HostLayout/>} >
             <Route index element={<Dashboard/>} />
             <Route path='income' element={<Income/>} />
             <Route path='vans' element={<HostVans/>} />
-            <Route path='vans/:id' element={<HostVansDetails/>}>
-              <Route index element={<HostVanInfo />}/>
-              <Route path='pricing' element={<HostVanPricing/>} />
-              <Route path='photos' element={<HostVanPhotos/>} />
-            </Route>
-            <Route path='reviews' element={<Reviews/>} />
-          </Route>
 
-          <Route path='Vans' element={<Vans vansData={vansData}/>} /> 
-          <Route path='Vans/:id' element={<VanDetail vansData={vansData}/>}/>
+            <Route path='vans/:id' element={<HostVansDetails/>}>
+            <Route index element={<HostVanInfo />}/>
+            <Route path='pricing' element={<HostVanPricing/>} />
+            <Route path='photos' element={<HostVanPhotos/>} />
+            </Route>
+
+            <Route path='reviews' element={<Reviews/>} />
         </Route>
-      </Routes>
-    </BrowserRouter>
-  )
+
+        <Route path='Vans' element={<Vans />}  loader={vansLoader}/> 
+        <Route path='Vans/:id' element={<VanDetail vansData={vansData}/>}/>
+        <Route path="*" element={<NotFound />} />
+        </Route>
+    ))
+
+    return (
+        <RouterProvider router={routes} />
+    )
 }
 
 export default App

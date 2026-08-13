@@ -361,7 +361,7 @@ a.active-link{
     margin-left: 25px;
 }
 
-.host-details-back-button{
+.back-button{
     all: unset;
     display: flex;
     justify-content: flex-start;
@@ -370,11 +370,11 @@ a.active-link{
     font-size: 0.9rem;
 }
 
-.host-details-back-button > span{
+.back-button > span{
     text-decoration: underline;
 }
 
-.host-details-back-button:hover{
+.back-button:hover{
     font-size: 1rem;
     color: #161616;
     cursor: pointer;
@@ -458,4 +458,14 @@ a.active-link{
 .host-van-detail-image {
     height: 100px;
     border-radius: 5px;
+}
+
+.not-found-container {
+    padding-inline: 26px;
+}
+
+.not-found-container .link-button {
+    width: 100%;
+    background-color: #161616;
+    color: white;
 }
